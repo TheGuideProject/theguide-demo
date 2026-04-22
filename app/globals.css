@@ -1275,6 +1275,36 @@ button { font-family: inherit; }
   transition: all .3s;
 }
 .waveform span.p { background: var(--accent-2); }
+.waveform.anim span.p:nth-last-child(-n+3) {
+  animation: wave-pulse 0.9s ease-in-out infinite;
+}
+.waveform.anim span.p:nth-last-child(2) { animation-delay: 0.15s; }
+.waveform.anim span.p:nth-last-child(3) { animation-delay: 0.3s; }
+@keyframes wave-pulse {
+  0%, 100% { transform: scaleY(1); }
+  50% { transform: scaleY(1.6); }
+}
+.player-live {
+  font-size: 9px;
+  font-weight: 800;
+  color: #FF5D5D;
+  margin-left: 6px;
+  animation: live-blink 1.2s ease-in-out infinite;
+}
+@keyframes live-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+.player-warn {
+  margin: 8px 14px 0;
+  padding: 8px 12px;
+  background: rgba(255, 180, 100, 0.15);
+  border: 1px solid rgba(255, 180, 100, 0.3);
+  border-radius: 10px;
+  font-size: 11px;
+  color: #E8C98A;
+  line-height: 1.5;
+}
 .player-times {
   display: flex;
   justify-content: space-between;
