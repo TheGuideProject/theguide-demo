@@ -1,18 +1,39 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { StatusBar } from "../PhoneChrome";
+import { AR_FORUM } from "../../lib/facts";
+import { speak, stopSpeaking } from "../../lib/tts";
 
 export function ARScreen({ onClose }: { onClose: () => void }) {
-  const [era, setEra] = useState(62);
-  const labels = ["Oggi", "100 d.C.", "27 a.C."];
-  const activeIndex = era < 33 ? 0 : era < 80 ? 1 : 2;
+  const [idx, setIdx] = useState(1);
+  const [speaking, setSpeaking] = useState(false);
+  const era = AR_FORUM[idx];
+
+  useEffect(() => () => stopSpeaking(), []);
+
+  const handleSpeak = () => {
+    if (speaking) {
+      stopSpeaking();
+      setSpeaking(false);
+      return;
+    }
+    const ok = speak(era.tts, {
+      onStart: () => setSpeaking(true),
+      onEnd: () => setSpeaking(false)
+    });
+    if (!ok) setSpeaking(false);
+  };
 
   return (
     <>
       <StatusBar variant="dark" />
       <div className="s-ar">
-        <div className="ar-bg" />
-        <div className="ruins" />
+        <div
+          className="ar-photo"
+          style={{ backgroundImage: `url(${era.photo})` }}
+          key={era.id}
+        />
+        <div className="ar-gradient" />
 
         <div className="ar-top">
           <div className="ar-badge">
@@ -31,40 +52,43 @@ export function ARScreen({ onClose }: { onClose: () => void }) {
           <span className="corner br" />
         </div>
 
+        <div className="ar-crosshair">
+          <svg viewBox="0 0 100 100">
+            <circle cx="50" cy="50" r="48" fill="none" stroke="#fff" strokeOpacity=".5" strokeWidth="1" />
+            <circle cx="50" cy="50" r="36" fill="none" stroke="#C65D3A" strokeWidth="1.5" strokeDasharray="3 3" />
+            <path d="M50 6 L50 22 M50 78 L50 94 M6 50 L22 50 M78 50 L94 50" stroke="#fff" strokeWidth="1" />
+          </svg>
+          <span className="ar-pin-label">Tempio di Saturno · 42m</span>
+        </div>
+
         <div className="ar-bottom">
-          <div className="ar-title">Foro Romano</div>
-          <div className="ar-sub">Guarda com&apos;era nell&apos;anno 100 d.C.</div>
+          <div className="ar-title">Foro Romano · {era.label}</div>
+          <div className="ar-sub">{era.caption}</div>
           <div className="ar-slider">
             <div className="slider-row">
-              {labels.map((l, i) => (
-                <span key={l} className={activeIndex === i ? "active" : ""}>
-                  {l}
-                </span>
+              {AR_FORUM.map((e, i) => (
+                <button
+                  key={e.id}
+                  className={`era-tab ${i === idx ? "active" : ""}`}
+                  onClick={() => setIdx(i)}
+                >
+                  {e.year}
+                </button>
               ))}
             </div>
-            <div
-              className="slider-bar"
-              onClick={(e) => {
-                const rect = e.currentTarget.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                setEra(Math.round((x / rect.width) * 100));
-              }}
-            >
-              <div className="slider-fill" style={{ width: `${era}%` }} />
-              <div className="knob" style={{ left: `${era}%` }} />
+            <div className="ar-years">
+              <span>2026</span>
+              <div className="ar-years-bar">
+                <span className="fill" style={{ width: `${(idx / (AR_FORUM.length - 1)) * 100}%` }} />
+              </div>
+              <span>27 a.C.</span>
             </div>
-            <div
-              style={{
-                display: "flex",
-                gap: 8,
-                justifyContent: "center",
-                fontSize: 10,
-                opacity: 0.85
-              }}
-            >
-              <span>🔇 Muta</span>
-              <span>·</span>
-              <span style={{ color: "var(--accent-2)" }}>🎙 Iris racconta</span>
+            <div className="ar-cta-row">
+              <button className={`ar-action ${speaking ? "speaking" : ""}`} onClick={handleSpeak}>
+                {speaking ? "⏹ Stop" : "🎙 Iris racconta"}
+              </button>
+              <button className="ar-action">📸 Salva</button>
+              <button className="ar-action">🗺 Indicazioni</button>
             </div>
           </div>
         </div>

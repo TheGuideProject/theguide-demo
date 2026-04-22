@@ -44,8 +44,12 @@ export function PartnerMapScreen({ onQR, onCheckout }: { onQR: () => void; onChe
         </div>
 
         <div className="pmap-body">
-          <div className="map-bg" />
-          <div className="river" />
+          <div
+            className="map-real"
+            style={{ backgroundImage: `url("https://staticmap.openstreetmap.de/staticmap.php?center=43.7696,11.2558&zoom=15&size=400x500&maptype=mapnik")` }}
+          />
+          <div className="map-overlay" />
+          <div className="map-attrib">© OpenStreetMap</div>
           <div className="pp" style={{ top: "30%", left: "40%" }}>🍝</div>
           <div className="pp sage" style={{ top: "42%", left: "62%" }}>🏛</div>
           <div className="pp dark" style={{ top: "56%", left: "36%" }}>🛍</div>

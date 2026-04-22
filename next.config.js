@@ -4,7 +4,10 @@ const nextConfig = {
   images: {
     remotePatterns: [
       { protocol: "https", hostname: "commons.wikimedia.org" },
-      { protocol: "https", hostname: "upload.wikimedia.org" }
+      { protocol: "https", hostname: "upload.wikimedia.org" },
+      { protocol: "https", hostname: "maps.wikimedia.org" },
+      { protocol: "https", hostname: "tile.openstreetmap.org" },
+      { protocol: "https", hostname: "staticmap.openstreetmap.de" }
     ]
   }
 };
