@@ -205,6 +205,12 @@ export default function App() {
               <span className="dot" />
               Demo interattivo · Iris v1
             </span>
+            <a className="tag-live" href="/b2b">
+              ▦ B2B Dashboard
+            </a>
+            <a className="tag-live" href="/pa">
+              ◇ PA · Comuni
+            </a>
             <a
               className="tag-live"
               href="https://github.com/TheGuideProject"
@@ -345,6 +351,25 @@ export default function App() {
               per saltare ovunque.
             </div>
           </div>
+        </div>
+
+        <div className="ecosystem-links">
+          <a className="eco-card partner" href="/b2b">
+            <div className="eco-ico">▦</div>
+            <div>
+              <div className="eco-title">B2B · Partner Dashboard</div>
+              <div className="eco-sub">Analytics, prenotazioni, offerte, payout · per ristoranti, hotel, musei</div>
+            </div>
+            <div className="eco-arrow">→</div>
+          </a>
+          <a className="eco-card gov" href="/pa">
+            <div className="eco-ico">◇</div>
+            <div>
+              <div className="eco-title">PA · Comuni &amp; Regioni</div>
+              <div className="eco-sub">Flussi turistici, eventi, imposta di soggiorno, sostenibilità</div>
+            </div>
+            <div className="eco-arrow">→</div>
+          </a>
         </div>
 
         <div className="footer-info">
