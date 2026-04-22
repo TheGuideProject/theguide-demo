@@ -1,7 +1,8 @@
 "use client";
 import { StatusBar } from "../PhoneChrome";
+import type { ScreenId } from "../../lib/types";
 
-export function ProfileScreen({ onKids, onA11y, onGroup }: { onKids: () => void; onA11y: () => void; onGroup: () => void }) {
+export function ProfileScreen({ onKids, onA11y, onGroup, onJump }: { onKids: () => void; onA11y: () => void; onGroup: () => void; onJump: (id: ScreenId) => void }) {
   return (
     <>
       <StatusBar variant="dark" />
@@ -94,6 +95,24 @@ export function ProfileScreen({ onKids, onA11y, onGroup }: { onKids: () => void;
             <button className="w-action" onClick={onA11y}>
               <div className="ico">♿</div>
               A11Y
+            </button>
+          </div>
+        </div>
+
+        <div className="pr-section">
+          <h5>Scorciatoie</h5>
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 8 }}>
+            <button className="w-action" onClick={() => onJump("event")}>
+              <div className="ico">🎭</div>
+              Eventi
+            </button>
+            <button className="w-action" onClick={() => onJump("pass")}>
+              <div className="ico">🎟</div>
+              Pass
+            </button>
+            <button className="w-action" onClick={() => onJump("chat")}>
+              <div className="ico">✨</div>
+              Iris
             </button>
           </div>
         </div>

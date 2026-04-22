@@ -12,7 +12,7 @@ export const SCREENS: Record<ScreenId, Screen> = {
   checkout: { id: "checkout", title: "Checkout", isModal: true },
   profile: { id: "profile", title: "Profilo", tab: "profile" },
   convert: { id: "convert", title: "Ricarica TravelPass", isModal: true },
-  pmap: { id: "pmap", title: "Partner", tab: "discover" },
+  pmap: { id: "pmap", title: "Partner", isModal: true },
   qr: { id: "qr", title: "Paga QR", isModal: true },
   success: { id: "success", title: "Successo", isModal: true },
   "smartlens-monument": {

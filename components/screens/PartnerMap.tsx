@@ -10,7 +10,7 @@ const PARTNERS = [
   { icon: "🍷", name: "Enoteca Pitti", cat: "Vino · Oltrarno", dist: "620m", discount: "−12%", class: "" }
 ];
 
-export function PartnerMapScreen({ onQR }: { onQR: () => void }) {
+export function PartnerMapScreen({ onQR, onCheckout }: { onQR: () => void; onCheckout: () => void }) {
   const [cat, setCat] = useState("all");
 
   return (
@@ -57,10 +57,10 @@ export function PartnerMapScreen({ onQR }: { onQR: () => void }) {
 
           <div className="pmap-list">
             <div className="sheet-grab" />
-            {PARTNERS.slice(0, 4).map((p) => (
+            {PARTNERS.slice(0, 4).map((p, idx) => (
               <button
                 key={p.name}
-                onClick={onQR}
+                onClick={idx === 0 ? onQR : onCheckout}
                 className="p-item"
                 style={{ background: "transparent", border: "none", width: "100%", textAlign: "left", cursor: "pointer", fontFamily: "inherit" }}
               >
@@ -68,7 +68,7 @@ export function PartnerMapScreen({ onQR }: { onQR: () => void }) {
                 <div className="p-info">
                   <div className="p-title">{p.name}</div>
                   <div className="p-sub">
-                    {p.cat} · ⭐ 4,{Math.floor(Math.random() * 3 + 6)}
+                    {p.cat} · ⭐ 4,{6 + (idx % 3)}
                   </div>
                 </div>
                 <div className="p-meta">

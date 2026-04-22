@@ -8,9 +8,10 @@ interface Props {
   onPlay: () => void;
   onAR: () => void;
   onCheckout: () => void;
+  onAddItinerary: () => void;
 }
 
-export function DetailScreen({ poiId, onBack, onPlay, onAR, onCheckout }: Props) {
+export function DetailScreen({ poiId, onBack, onPlay, onAR, onCheckout, onAddItinerary }: Props) {
   const poi = POIS.find((p) => p.id === poiId) || POIS[0];
 
   return (
@@ -63,7 +64,7 @@ export function DetailScreen({ poiId, onBack, onPlay, onAR, onCheckout }: Props)
               Salta la fila
               <span className="sub">Da €28</span>
             </button>
-            <button className="action-big">
+            <button className="action-big" onClick={onAddItinerary}>
               <div className="ico">🗺</div>
               Itinerario
               <span className="sub">Aggiungi</span>

@@ -6,9 +6,10 @@ interface Props {
   onTopUp: () => void;
   onPartners: () => void;
   onPass: () => void;
+  onReceipt: () => void;
 }
 
-export function WalletScreen({ onQR, onTopUp, onPartners, onPass }: Props) {
+export function WalletScreen({ onQR, onTopUp, onPartners, onPass, onReceipt }: Props) {
   return (
     <>
       <StatusBar />
@@ -44,11 +45,11 @@ export function WalletScreen({ onQR, onTopUp, onPartners, onPass }: Props) {
         </div>
 
         <div className="w-section-title">Ultime transazioni</div>
-        <Txn icon="🍝" title="Trattoria Mario" sub="Firenze · oggi 13:24" amount="−€35,00" cb="+€1,75" />
-        <Txn icon="🏛" title="Uffizi · skip-the-line" sub="Partner · ieri 14:30" amount="−€26,00" cb="+€0,00" muted />
-        <Txn icon="🍷" title="Enoteca Pitti" sub="ieri 19:45" amount="−€42,00" cb="+€2,10" />
-        <Txn icon="＋" title="Ricarica · Apple Pay" sub="15 apr · 08:12" amount="+€150,00" cb="" muted />
-        <Txn icon="🎁" title="Cashback weekend" sub="partner network" amount="+€8,75" cb="" />
+        <Txn onClick={onReceipt} icon="🍝" title="Trattoria Mario" sub="Firenze · oggi 13:24" amount="−€35,00" cb="+€1,75" />
+        <Txn onClick={onReceipt} icon="🏛" title="Uffizi · skip-the-line" sub="Partner · ieri 14:30" amount="−€26,00" cb="+€0,00" muted />
+        <Txn onClick={onReceipt} icon="🍷" title="Enoteca Pitti" sub="ieri 19:45" amount="−€42,00" cb="+€2,10" />
+        <Txn onClick={onReceipt} icon="＋" title="Ricarica · Apple Pay" sub="15 apr · 08:12" amount="+€150,00" cb="" muted />
+        <Txn onClick={onReceipt} icon="🎁" title="Cashback weekend" sub="partner network" amount="+€8,75" cb="" />
 
         <div style={{ height: 16 }} />
       </div>
@@ -62,7 +63,8 @@ function Txn({
   sub,
   amount,
   cb,
-  muted
+  muted,
+  onClick
 }: {
   icon: string;
   title: string;
@@ -70,9 +72,14 @@ function Txn({
   amount: string;
   cb: string;
   muted?: boolean;
+  onClick?: () => void;
 }) {
   return (
-    <div className="txn">
+    <button
+      className="txn"
+      onClick={onClick}
+      style={{ background: "transparent", border: "none", width: "100%", textAlign: "left", cursor: "pointer", fontFamily: "inherit" }}
+    >
       <div className="icon">{icon}</div>
       <div className="mid">
         <div className="t">{title}</div>
@@ -85,6 +92,6 @@ function Txn({
           <div className="cb" style={{ color: "var(--muted)" }}>—</div>
         )}
       </div>
-    </div>
+    </button>
   );
 }

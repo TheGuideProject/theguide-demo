@@ -1,13 +1,15 @@
 "use client";
 import { StatusBar } from "../PhoneChrome";
 import { POIS } from "../../lib/constants";
+import type { ScreenId } from "../../lib/types";
 
 interface Props {
   onOpenDetail: (id: string) => void;
   onOpenAR: () => void;
+  onJump: (id: ScreenId) => void;
 }
 
-export function MapScreen({ onOpenDetail, onOpenAR }: Props) {
+export function MapScreen({ onOpenDetail, onOpenAR, onJump }: Props) {
   return (
     <>
       <StatusBar />
@@ -16,22 +18,23 @@ export function MapScreen({ onOpenDetail, onOpenAR }: Props) {
         <div className="river" />
 
         <div className="map-top">
-          <div className="search-box">
+          <button className="search-box" onClick={() => onJump("chat")} style={{ border: "none", cursor: "pointer", fontFamily: "inherit", textAlign: "left", width: "100%" }}>
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
               <circle cx="11" cy="11" r="7" />
               <path d="M21 21l-4.3-4.3" />
             </svg>
-            <span>Firenze · Oggi</span>
-          </div>
-          <button className="chip solid">Per me</button>
+            <span>Chiedi a Iris · Firenze oggi</span>
+          </button>
+          <button className="chip solid" onClick={() => onJump("itinerary")}>Per me</button>
         </div>
 
         <div className="filter-row">
-          <button className="chip accent">Arte</button>
-          <button className="chip">Food</button>
-          <button className="chip">Gratis</button>
-          <button className="chip">Nascosti</button>
+          <button className="chip accent" onClick={() => onOpenDetail("uffizi")}>Arte</button>
+          <button className="chip" onClick={() => onOpenDetail("mercato")}>Food</button>
+          <button className="chip" onClick={() => onJump("pmap")}>Partner</button>
+          <button className="chip" onClick={() => onJump("event")}>Eventi</button>
           <button className="chip" onClick={onOpenAR}>AR</button>
+          <button className="chip" onClick={() => onJump("smartlens-monument")}>Lens</button>
         </div>
 
         <button

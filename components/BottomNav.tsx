@@ -34,11 +34,13 @@ const ITEMS: { id: TabId; label: string; icon: React.ReactNode }[] = [
   },
   {
     id: "discover",
-    label: "Partner",
+    label: "Scopri",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round">
-        <circle cx="12" cy="12" r="9" />
-        <path d="M12 3v18M3 12h18" />
+        <rect x="3" y="3" width="7" height="7" rx="1.4" />
+        <rect x="14" y="3" width="7" height="7" rx="1.4" />
+        <rect x="3" y="14" width="7" height="7" rx="1.4" />
+        <rect x="14" y="14" width="7" height="7" rx="1.4" />
       </svg>
     )
   },
